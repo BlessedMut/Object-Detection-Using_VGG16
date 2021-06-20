@@ -26,9 +26,11 @@ hide_footer_style = """
 st.markdown(hide_footer_style, unsafe_allow_html=True)
 
 
-files = [f for f in os.listdir("./encoded_images") if os.path.isfile(os.path.join("./encoded_images", f))]
-fi = [i.split()[0] for i in files] 
-detected_obj = list(set(fi))
+# files = [f for f in os.listdir("./encoded_images") if os.path.isfile(os.path.join("./encoded_images", f))]
+# fi = [i.split()[0] for i in files] 
+# detected_obj = list(set(fi))
+
+detected_obj = ['dam', 'tow_truck', 'rule', 'limousine', 'bannister', 'car_mirror', 'cab', 'suspension_bridge', 'trolleybus', 'trailer_truck', 'bullet_train', 'racer', 'wing', 'matchstick']
 
 def play_video(vid_path):
     # video_file = open(vid_path, 'rb')
