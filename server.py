@@ -1,5 +1,4 @@
 import streamlit as st
-import cv2 as cv
 import tempfile
 import warnings
 import os
@@ -32,9 +31,9 @@ fi = [i.split()[0] for i in files]
 detected_obj = list(set(fi))
 
 def play_video(vid_path):
-    video_file = open(vid_path, 'rb')
-    video_bytes = video_file.read()
-    st.video(video_bytes)
+    # video_file = open(vid_path, 'rb')
+    # video_bytes = video_file.read()
+    st.video(vid_path)
   
 
 def filter_frame(txt_search):
@@ -95,7 +94,6 @@ def main():
 
                  
 
-
     else:
 
         st.title('Object(s) Detection in video')
@@ -104,14 +102,14 @@ def main():
 
         with hs2:
             h_search = st.text_input("Search for objects in video")
-            if h_search in detected_obj:
+            if h_search.lower() in detected_obj:
                 rez = "found"
             else:
                 rez = "not found"
         
         with hs3:
             st.write('Search results')
-            if h_search is None:
+            if h_search.lower() is None:
                 status = st.write(f'{h_search} ...')
             else:
                 status = st.write(f'{h_search} {rez}')
@@ -135,12 +133,12 @@ def main():
                 st.write("")
                 st.write("")
                 st.write("")
-                if h_search in detected_obj:
+                if h_search.lower() in detected_obj:
                     rez = "found"
                     img = Image.open('./encoded_images/'+str(filter_frame(h_search)))
-                    st.image(img, caption=h_search + " frame found")
+                    st.image(img, caption=h_search.lower() + " frame found")
                 else:
-                    play_video("./videos/video.mp4")
+                    play_video("https://youtu.be/oGMQacLTr3U")
         else:
             col1, col2 = st,beta_columns([2,6])
             with col1:  
@@ -148,7 +146,7 @@ def main():
                 for i in range(len(detected_obj)):
                     st.write(str(i+1) +  " "+str(detected_obj[i]))
             with col2:
-                play_video("./videos/video.mp4")
+                play_video("https://youtu.be/oGMQacLTr3U")
     
                     
 
