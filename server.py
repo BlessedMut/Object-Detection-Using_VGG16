@@ -88,14 +88,12 @@ def main():
                     tfile.write(f.read())
 
 
-                    vf = cv.VideoCapture(tfile.name)
-
                     with col1:
                         st.write("Objects in video")
                         for i in range(len(detected_obj)):
                             st.write(str(i+1) +  " "+str(detected_obj[i]))
 
-                    stframe = st.empty()
+                 
 
 
     else:
