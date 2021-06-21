@@ -18,7 +18,6 @@ def extract_frames(vid_path, outputpath):
     index = 0
     while(True):
         
-
         # Extract images
         ret, frame = vid.read()
         # end of frames
@@ -56,11 +55,13 @@ def label_frames(inputpath, outputpath, videoFile):
         filename =inputpath+"/frame"+str(count)+".jpg"
         p = decode_predictions(identify_frames(filename))
         label = p[0][0][1]
-        if label not in obj_detected:
-            obj_detected.append(label)
-        cv2.putText(frame, "[*Object Detected] : "+str(label), (25, 60), font, fontScale=font_scale,color=(0,255,0), thickness=3)
+        threshold = p[0][0][2]
+        if threshold >= 0.5:
+            if (label not in obj_detected):
+                obj_detected.append(label)
+            cv2.putText(frame, "[*Object Detected] : "+str(label), (25, 60), font, fontScale=font_scale,color=(0,255,0), thickness=3)
+            print ('Enconded... ' + str(label) + "... " + str(count))
         cv2.imwrite(outputpath+ str(label) + " " + str(count)+".jpg", frame)
-        print ('Econded... ' + str(label) + "... " + str(count))
         count += 1
     cap.release()
     print ("[**Frame Encoding] - Done")
